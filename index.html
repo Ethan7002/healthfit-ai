@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="HealthfitAI — Taylor's campus food delivery and AI fitness planning prototype" />
+  <title>HealthfitAI · Taylor's</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+
+  <section class="auth-screen" id="authScreen" aria-label="Create account">
+    <div class="auth-art">
+      <a class="brand brand-light" href="#"><span class="brand-mark">H</span><span>Healthfit<span>AI</span></span></a>
+      <div class="auth-copy">
+        <span class="eyebrow light">TAYLOR’S LAKESIDE CAMPUS</span>
+        <h1>Eat smarter.<br>Train better.</h1>
+        <p>Your all-in-one campus wellness companion for calorie-smart meals, personalised workouts and everyday AI guidance.</p>
+      </div>
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="float-card fc-one"><span>Protein today</span><b>86 / 110g</b><i></i></div>
+      <div class="float-card fc-two"><b>7 days</b><span>Full AI access</span></div>
+      <div class="float-card fc-three"><span>🔥</span><div><b>482 kcal</b><small>Burned today</small></div></div>
+    </div>
+    <div class="auth-panel">
+      <form class="auth-form" id="registerForm">
+        <div class="auth-top"><span class="mobile-brand">HealthfitAI</span><span>Already a member? <button type="button" class="text-btn">Log in</button></span></div>
+        <div class="step-dots"><span class="active"></span><span></span><span></span></div>
+        <span class="eyebrow">BUILD YOUR WELLNESS PROFILE</span>
+        <h2>Welcome to HealthfitAI</h2>
+        <p class="muted">Sign up for 7 days of AI meal and workout analysis. No payment card required.</p>
+        <label>Username<input id="username" name="username" autocomplete="username" placeholder="e.g. TaylorFit" required minlength="2"></label>
+        <label>Create password<div class="input-wrap"><input id="password" name="password" autocomplete="new-password" type="password" placeholder="At least 6 characters" required minlength="6"><button class="eye" type="button" data-eye="password" aria-label="Show password">◉</button></div></label>
+        <label>Confirm password<div class="input-wrap"><input id="confirmPassword" name="confirmPassword" autocomplete="new-password" type="password" placeholder="Enter your password again" required><button class="eye" type="button" data-eye="confirmPassword" aria-label="Show password">◉</button></div></label>
+        <label class="check"><input type="checkbox" required><span>I agree to the Terms and Privacy Notice. This prototype does not upload real personal data.</span></label>
+        <div class="form-error" id="formError" role="alert"></div>
+        <button class="primary wide" type="submit">Create account & start free trial <span>→</span></button>
+        <p class="fineprint">AI guidance is for general wellness only and does not replace medical advice.</p>
+      </form>
+    </div>
+  </section>
+
+  <div class="app hidden" id="app">
+    <header class="topbar">
+      <a class="brand" href="#" data-go="home"><span class="brand-mark">H</span><span>Healthfit<span>AI</span></span></a>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-go="home">Home</button>
+        <button class="nav-link" data-go="food">Campus Food</button>
+        <button class="nav-link" data-go="fitness">AI Fitness</button>
+        <button class="nav-link" data-go="progress">Progress</button>
+      </nav>
+      <div class="top-actions">
+        <button class="trial-pill" id="trialButton"><span>✦</span><b>AI PRO</b><small>7 days left</small></button>
+        <button class="avatar" id="profileButton" aria-label="Profile"><span id="avatarInitial">T</span><i></i></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="homeView">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">GOOD MORNING, <span id="displayName">TaylorFit</span> 👋</span>
+            <h1>One step closer<br><em>to your goal.</em></h1>
+            <p>Based on your fat-loss goal, AI has prepared today's meal and workout recommendations.</p>
+            <div class="hero-actions"><button class="primary" data-go="food">Order food <span>→</span></button><button class="secondary" data-go="fitness">View workout plan</button></div>
+            <div class="trust-row"><span>✓ Campus delivery</span><span>✓ Clear calories</span><span>✓ Personalised picks</span></div>
+          </div>
+          <div class="hero-visual" aria-label="Today's wellness overview">
+            <div class="sun"></div>
+            <div class="lake-lines"></div>
+            <div class="hero-stat main-stat"><span class="stat-ring"><b>68%</b></span><div><small>Daily goal</small><b>1,360 / 2,000 kcal</b></div></div>
+            <div class="hero-stat mini-stat one"><span>🥗</span><div><small>Next meal</small><b>High-protein lunch</b></div></div>
+            <div class="hero-stat mini-stat two"><span>⚡</span><div><small>Goal streak</small><b>5 days</b></div></div>
+            <div class="runner">🏃</div>
+          </div>
+        </div>
+
+        <div class="section-head"><div><span class="eyebrow">YOUR TWO CORE SPACES</span><h2>What are you doing today?</h2></div><p>HealthfitAI connects every choice to your daily goals.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card food-card" data-go="food" tabindex="0">
+            <div class="feature-icon">🥪</div><span class="tag">TAYLOR’S CAMPUS DINING</span><h3>Campus food with calories upfront</h3><p>Browse Subway, compare calories and protein, and choose quickly for your goal.</p>
+            <div class="card-meta"><span>12–25 minutes</span><span>From RM 9.90</span></div><button>Browse menu <span>↗</span></button>
+          </article>
+          <article class="feature-card fitness-card" data-go="fitness" tabindex="0">
+            <div class="feature-icon">🏋️</div><span class="tag">AI PERSONALISED</span><h3>A workout plan that fits you</h3><p>Share your profile, goal and schedule to get a plan you can actually follow.</p>
+            <div class="card-meta"><span>3-minute setup</span><span>Weekly adjustments</span></div><button>Build my plan <span>↗</span></button>
+          </article>
+        </div>
+
+        <div class="dashboard-row">
+          <article class="mini-dashboard"><div class="mini-head"><div><span class="eyebrow">TODAY'S NUTRITION</span><h3>You're on track</h3></div><span class="score">82</span></div><div class="bars"><div><span>Protein <b>86g / 110g</b></span><i><u style="width:78%"></u></i></div><div><span>Carbs <b>142g / 230g</b></span><i><u style="width:62%"></u></i></div><div><span>Fat <b>41g / 65g</b></span><i><u style="width:63%"></u></i></div></div></article>
+          <article class="ai-tip"><span class="spark">✦</span><div><span class="eyebrow">TODAY'S AI TIP</span><h3>Aim for 25g+ protein at lunch</h3><p>It can help you stay satisfied through afternoon classes while moving closer to today's target.</p><button data-go="food">See recommended meals →</button></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="foodView">
+        <div class="page-title"><div><button class="back" data-go="home">← Back home</button><span class="eyebrow">TAYLOR’S LAKESIDE · CAMPUS DINING</span><h1>Order from Subway</h1><p>Calories and nutrients use standard recipes. Actual values vary with bread, sauce and local serving size.</p></div><div class="store-status"><span></span><div><b>Open now</b><small>12–25 min estimate</small></div></div></div>
+        <div class="food-layout">
+          <div class="menu-area">
+            <div class="filter-row"><div class="search"><span>⌕</span><input id="menuSearch" placeholder="Search meals"></div><div class="chips" id="categoryChips"><button class="active" data-filter="all">All</button><button data-filter="high-protein">High protein</button><button data-filter="lighter">Under 500 kcal</button><button data-filter="vegetarian">Vegetarian</button></div></div>
+            <div class="menu-top"><h2>Selected for your goal</h2><span id="menuCount">6 meals</span></div>
+            <div class="menu-grid" id="menuGrid"></div>
+            <p class="data-note">Nutrition reference: <a href="https://www.subway.com/en-us/-/media/northamerica/usa/nutrition/nutritiondocuments/us_nutrition_12-2-2024.pdf" target="_blank" rel="noreferrer">official Subway nutrition guide</a>. Calories are approximate standard-recipe values; Malaysian recipes, sauces and portions may differ. Prices are for demonstration only. Campus context: <a href="https://university.taylors.edu.my/en/student-life/your-taylors-journey/eating-at-campus.html" target="_blank" rel="noreferrer">Taylor’s University dining guide</a>.</p>
+          </div>
+          <aside class="cart" id="cartPanel"><div class="cart-title"><div><span class="eyebrow">YOUR ORDER</span><h2>Subway</h2></div><span class="cart-count" id="cartCount">0</span></div><div class="cart-empty" id="cartEmpty"><span>🧺</span><h3>Your basket is empty</h3><p>Choose a meal that works for your goal.</p></div><div class="cart-items" id="cartItems"></div><div class="fulfilment hidden" id="fulfilment"><span>Dining option</span><div><button class="active" data-mode="delivery">Delivery</button><button data-mode="pickup">Takeaway</button><button data-mode="dinein">Dine in</button></div></div><div class="cart-summary hidden" id="cartSummary"><p><span>Subtotal</span><b id="subtotal">RM 0.00</b></p><p><span>Delivery / service fee</span><b id="fee">RM 0.00</b></p><p class="total"><span>Total</span><b id="total">RM 0.00</b></p><button class="primary wide" id="checkoutButton">Continue to payment <span>→</span></button></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="fitnessView">
+        <div class="fitness-hero"><div><button class="back" data-go="home">← Back home</button><span class="eyebrow">AI FITNESS COACH</span><h1>A plan that fits your life,<br>not the other way around.</h1><p>Share a few details to get practical workout and nutrition guidance for campus life.</p></div><div class="fit-visual"><span>✦</span><b>3 times a week</b><small>AI-recommended frequency</small></div></div>
+        <form class="fitness-form" id="fitnessForm">
+          <div class="form-section"><div class="num">01</div><div><span class="eyebrow">ABOUT YOU</span><h2>Let's start with the basics</h2></div></div>
+          <div class="field-grid"><label>Age<input type="number" id="age" value="21" min="16" max="80"></label><label>Height cm<input type="number" id="height" value="168" min="120" max="230"></label><label>Weight kg<input type="number" id="weight" value="64" min="35" max="250"></label><label>Training days / week<select id="days"><option value="2">2 days</option><option value="3" selected>3 days</option><option value="4">4 days</option><option value="5">5 days</option></select></label></div>
+          <div class="form-section"><div class="num">02</div><div><span class="eyebrow">YOUR GOAL</span><h2>What would you most like to change?</h2></div></div>
+          <div class="goal-options" id="goalOptions"><label><input type="radio" name="goal" value="Fat loss" checked><span>🔥</span><b>Fat loss</b><small>Reduce body fat and keep muscle</small></label><label><input type="radio" name="goal" value="Muscle gain"><span>💪</span><b>Muscle gain</b><small>Build strength and muscle</small></label><label><input type="radio" name="goal" value="Better fitness"><span>⚡</span><b>Better fitness</b><small>Improve energy and stamina</small></label></div>
+          <div class="form-section"><div class="num">03</div><div><span class="eyebrow">TRAINING STYLE</span><h2>Choose what you enjoy</h2></div></div>
+          <div class="preference-row"><label><input type="checkbox" value="Strength training" checked><span>Strength training</span></label><label><input type="checkbox" value="Running"><span>Running</span></label><label><input type="checkbox" value="Yoga"><span>Yoga</span></label><label><input type="checkbox" value="Bodyweight" checked><span>Bodyweight</span></label></div>
+          <button class="primary plan-button" type="submit">✦ Build my AI plan</button>
+        </form>
+        <div class="plan-result hidden" id="planResult"><div class="result-head"><div><span class="eyebrow">YOUR WEEKLY PLAN</span><h2><span id="planGoal">Fat loss</span> · 3-day training plan</h2><p id="planSummary"></p></div><div class="calorie-target"><small>Suggested daily intake</small><b id="calorieTarget">1,850</b><span>kcal</span></div></div><div class="week-grid" id="weekGrid"></div><div class="result-tip"><span>✦</span><div><b>AI coach note</b><p>Stay consistent for two weeks, then adjust volume based on completion and fatigue. Aim for 7–8 hours of sleep.</p></div><button data-go="food">Match high-protein meals →</button></div></div>
+      </section>
+
+      <section class="view" id="progressView">
+        <div class="page-title"><div><button class="back" data-go="home">← Back home</button><span class="eyebrow">THIS WEEK</span><h1>Every step counts</h1><p>This page uses demonstration data. A live version would update from orders, workouts and your own entries.</p></div></div>
+        <div class="progress-grid"><article><span>🔥</span><small>Workouts this week</small><b>3 / 4 sessions</b><i><u style="width:75%"></u></i></article><article><span>🥗</span><small>Days on target</small><b>5 / 7 days</b><i><u style="width:71%"></u></i></article><article><span>⚖️</span><small>Weight change</small><b>− 0.6 kg</b><i><u style="width:60%"></u></i></article></div>
+        <div class="chart-card"><div><span class="eyebrow">PAST 7 DAYS</span><h2>Daily calorie balance</h2></div><div class="chart" aria-label="Seven-day calorie chart"><span style="height:58%"><i>Mon</i></span><span style="height:72%"><i>Tue</i></span><span style="height:65%"><i>Wed</i></span><span class="accent" style="height:88%"><i>Thu</i></span><span style="height:76%"><i>Fri</i></span><span style="height:52%"><i>Sat</i></span><span style="height:42%"><i>Sun</i></span></div></div>
+      </section>
+    </main>
+
+    <button class="chat-fab" id="chatFab" aria-label="Open AI assistant"><span>✦</span><b>Ask Healthfit AI</b></button>
+    <aside class="chat-panel" id="chatPanel" aria-label="AI chat">
+      <div class="chat-head"><div><span class="spark">✦</span><div><b>Healthfit AI</b><small><i></i> Online · Demo mode</small></div></div><button id="closeChat">×</button></div>
+      <div class="chat-body" id="chatBody"><div class="message ai">Hi! I can compare menu calories, explain your workout plan or offer general wellness guidance. Where would you like to start?</div><div class="quick-prompts"><button>Recommend lunch under 500 kcal</button><button>How should I train today?</button><button>How can I get more protein?</button></div></div>
+      <form class="chat-input" id="chatForm"><input id="chatInput" placeholder="Ask a question…" autocomplete="off"><button type="submit">↑</button></form>
+    </aside>
+
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <section class="modal" id="paymentModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="paymentModal">×</button><span class="modal-icon">✓</span><span class="eyebrow">SECURE DEMO CHECKOUT</span><h2>Review and pay</h2><div class="pay-summary"><p><span>Order</span><b id="payItems">0 items</b></p><p><span>Dining option</span><b id="payMode">Delivery</b></p><p><span>Amount due</span><b id="payTotal">RM 0.00</b></p></div><label>Card number<input value="4242 4242 4242 4242" aria-label="Demo card number"></label><div class="pay-fields"><label>Expiry<input value="12/30"></label><label>CVV<input value="123"></label></div><button class="primary wide" id="payButton">Simulate payment <span>→</span></button><small class="modal-note">Interactive demo only. No real charge is made and no payment details are stored.</small></section>
+    <section class="modal success-modal" id="successModal" aria-modal="true" role="dialog"><span class="success-check">✓</span><h2>Order confirmed</h2><p>Subway is preparing your meal. Estimated arrival at Taylor’s Lakeside Campus: <b>18 minutes</b>.</p><div class="order-no">Order <b>HF-2026-1024</b></div><button class="primary wide" data-close="successModal">Done</button></section>
+    <section class="modal subscription-modal" id="subscriptionModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="subscriptionModal">×</button><span class="eyebrow">AI REPORT PRO</span><h2>Keep learning about your body after day seven</h2><p>Unlock weekly AI reports, automatic plan adjustments and personalised meal matching.</p><ul><li>✓ Weekly training and nutrition trends</li><li>✓ Goals that adapt to your progress</li><li>✓ Unlimited AI wellness chat</li></ul><div class="price"><b>RM 14.90</b><span>/ month</span></div><button class="primary wide" id="subscribeButton">Start 7-day free trial</button><small class="modal-note">Demo subscription only. No charge will be made.</small></section>
+    <section class="modal profile-modal" id="profileModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="profileModal">×</button><div class="profile-large" id="profileInitial">T</div><h2 id="profileName">TaylorFit</h2><p>Student account · Taylor’s Lakeside</p><div class="profile-links"><button id="openSubscription">✦ AI report subscription <span>7-day trial →</span></button><button>⚙ Personal profile <span>›</span></button><button>⌁ Privacy and data <span>›</span></button></div></section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
