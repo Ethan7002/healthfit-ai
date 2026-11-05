@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261105" />
+  <link rel="stylesheet" href="enhancements.css?v=20261105" />
 </head>
 <body>
   <div class="noise"></div>
@@ -28,7 +29,7 @@
     </div>
     <div class="auth-panel">
       <form class="auth-form" id="registerForm">
-        <div class="auth-top"><span class="mobile-brand">HealthfitAI</span><span>Already a member? <button type="button" class="text-btn">Log in</button></span></div>
+        <div class="auth-top"><span class="mobile-brand">HealthfitAI</span><span>Already a member? <button type="button" class="text-btn" data-auth="login">Log in</button></span></div>
         <div class="step-dots"><span class="active"></span><span></span><span></span></div>
         <span class="eyebrow">BUILD YOUR WELLNESS PROFILE</span>
         <h2>Welcome to HealthfitAI</h2>
@@ -41,6 +42,48 @@
         <button class="primary wide" type="submit">Create account & start free trial <span>→</span></button>
         <p class="fineprint">AI guidance is for general wellness only and does not replace medical advice.</p>
       </form>
+      <form class="auth-form hidden" id="loginForm">
+        <div class="auth-top"><span class="mobile-brand">HealthfitAI</span><span>New here? <button type="button" class="text-btn" data-auth="register">Create account</button></span></div>
+        <div class="step-dots"><span class="active"></span><span></span><span></span></div>
+        <span class="eyebrow">WELCOME BACK</span>
+        <h2>Log in to your plan</h2>
+        <p class="muted">Continue your meals, workouts and progress from this browser.</p>
+        <label>Username<input id="loginUsername" autocomplete="username" placeholder="Your username" required></label>
+        <label>Password<div class="input-wrap"><input id="loginPassword" autocomplete="current-password" type="password" placeholder="Your password" required><button class="eye" type="button" data-eye="loginPassword" aria-label="Show password">◉</button></div></label>
+        <div class="form-error" id="loginError" role="alert"></div>
+        <button class="primary wide" type="submit">Log in <span>→</span></button>
+        <p class="fineprint">Demo accounts are stored only in this browser. No information is sent to a server.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="onboarding-screen hidden" id="onboardingScreen" aria-label="Set up your wellness profile">
+    <div class="onboarding-shell">
+      <aside class="onboarding-side">
+        <a class="brand brand-light" href="#"><span class="brand-mark">H</span><span>Healthfit<span>AI</span></span></a>
+        <div><span class="eyebrow light">PERSONALISED FROM DAY ONE</span><h1>Tell us what<br>works for you.</h1><p>Your answers shape your training intensity, calorie guidance and meal suggestions. You can edit everything later.</p></div>
+        <ol id="onboardingProgress"><li class="active">Your body</li><li>Your goal</li><li>Your lifestyle</li></ol>
+      </aside>
+      <form class="onboarding-form" id="onboardingForm">
+        <div class="onboarding-step active" data-step="1">
+          <span class="eyebrow">STEP 1 OF 3</span><h2>Your current profile</h2><p class="muted">These details help estimate a sensible starting point.</p>
+          <div class="field-grid onboarding-fields"><label>Age<input id="onboardAge" type="number" min="16" max="80" value="21" required></label><label>Gender<select id="onboardGender"><option>Prefer not to say</option><option>Female</option><option>Male</option><option>Non-binary</option></select></label><label>Height (cm)<input id="onboardHeight" type="number" min="120" max="230" value="168" required></label><label>Weight (kg)<input id="onboardWeight" type="number" min="35" max="250" value="64" required></label></div>
+          <label class="full-label">Current activity level<select id="onboardActivity"><option value="sedentary">Mostly seated · little exercise</option><option value="light" selected>Lightly active · 1–2 sessions/week</option><option value="moderate">Moderately active · 3–4 sessions/week</option><option value="high">Very active · 5+ sessions/week</option></select></label>
+        </div>
+        <div class="onboarding-step" data-step="2">
+          <span class="eyebrow">STEP 2 OF 3</span><h2>Define your goal</h2><p class="muted">Choose one primary goal. Your plan will stay realistic and gradual.</p>
+          <div class="goal-options onboarding-goals"><label><input type="radio" name="onboardGoal" value="Fat loss" checked><span>🔥</span><b>Fat loss</b><small>Reduce body fat while preserving strength</small></label><label><input type="radio" name="onboardGoal" value="Muscle gain"><span>💪</span><b>Muscle gain</b><small>Build muscle and strength gradually</small></label><label><input type="radio" name="onboardGoal" value="Better fitness"><span>⚡</span><b>Better fitness</b><small>Improve energy, mobility and stamina</small></label></div>
+          <div class="field-grid onboarding-fields"><label>Target weight (kg)<input id="onboardTargetWeight" type="number" min="35" max="250" value="60"></label><label>Training days / week<select id="onboardDays"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label></div>
+        </div>
+        <div class="onboarding-step" data-step="3">
+          <span class="eyebrow">STEP 3 OF 3</span><h2>Make the plan fit your life</h2><p class="muted">Tell your coach what you enjoy and what feels sustainable.</p>
+          <div class="field-grid onboarding-fields"><label>Current fitness<select id="onboardFitness"><option>Beginner</option><option selected>Intermediate</option><option>Advanced</option></select></label><label>Comfortable intensity<select id="onboardIntensity"><option>Gentle</option><option selected>Moderate</option><option>Challenging</option></select></label><label>Session length<select id="onboardDuration"><option value="20">20 minutes</option><option value="35" selected>35 minutes</option><option value="50">50 minutes</option><option value="60">60 minutes</option></select></label><label>Diet preference<select id="onboardDiet"><option>No preference</option><option>High protein</option><option>Vegetarian</option><option>Vegan</option><option>Halal-friendly</option><option>Lower carb</option></select></label></div>
+          <label class="full-label">Limitations or injuries<textarea id="onboardLimitations" placeholder="e.g. sensitive knees, no jumping, none"></textarea></label>
+          <label class="full-label">Foods you avoid<textarea id="onboardAvoid" placeholder="e.g. peanuts, dairy, seafood, none"></textarea></label>
+        </div>
+        <div class="onboarding-actions"><button type="button" class="secondary hidden" id="onboardBack">← Back</button><button type="button" class="primary" id="onboardNext">Continue <span>→</span></button><button type="submit" class="primary hidden" id="onboardFinish">Create my plan <span>→</span></button></div>
+        <p class="fineprint">General wellness guidance only. Seek professional advice for medical conditions or injuries.</p>
+      </form>
     </div>
   </section>
 
@@ -52,6 +95,7 @@
         <button class="nav-link" data-go="food">Campus Food</button>
         <button class="nav-link" data-go="fitness">AI Fitness</button>
         <button class="nav-link" data-go="progress">Progress</button>
+        <button class="nav-link" data-go="profile">Profile</button>
       </nav>
       <div class="top-actions">
         <button class="trial-pill" id="trialButton"><span>✦</span><b>AI PRO</b><small>7 days left</small></button>
@@ -65,14 +109,14 @@
           <div class="hero-copy">
             <span class="eyebrow">GOOD MORNING, <span id="displayName">TaylorFit</span> 👋</span>
             <h1>One step closer<br><em>to your goal.</em></h1>
-            <p>Based on your fat-loss goal, AI has prepared today's meal and workout recommendations.</p>
+            <p>Based on your <strong id="homeGoal">fat-loss</strong> goal, AI has prepared today's meal and workout recommendations.</p>
             <div class="hero-actions"><button class="primary" data-go="food">Order food <span>→</span></button><button class="secondary" data-go="fitness">View workout plan</button></div>
             <div class="trust-row"><span>✓ Campus delivery</span><span>✓ Clear calories</span><span>✓ Personalised picks</span></div>
           </div>
           <div class="hero-visual" aria-label="Today's wellness overview">
             <div class="sun"></div>
             <div class="lake-lines"></div>
-            <div class="hero-stat main-stat"><span class="stat-ring"><b>68%</b></span><div><small>Daily goal</small><b>1,360 / 2,000 kcal</b></div></div>
+            <div class="hero-stat main-stat"><span class="stat-ring"><b>68%</b></span><div><small>Daily goal</small><b>1,360 / <span id="homeCalories">2,000</span> kcal</b></div></div>
             <div class="hero-stat mini-stat one"><span>🥗</span><div><small>Next meal</small><b>High-protein lunch</b></div></div>
             <div class="hero-stat mini-stat two"><span>⚡</span><div><small>Goal streak</small><b>5 days</b></div></div>
             <div class="runner">🏃</div>
@@ -119,6 +163,9 @@
           <div class="goal-options" id="goalOptions"><label><input type="radio" name="goal" value="Fat loss" checked><span>🔥</span><b>Fat loss</b><small>Reduce body fat and keep muscle</small></label><label><input type="radio" name="goal" value="Muscle gain"><span>💪</span><b>Muscle gain</b><small>Build strength and muscle</small></label><label><input type="radio" name="goal" value="Better fitness"><span>⚡</span><b>Better fitness</b><small>Improve energy and stamina</small></label></div>
           <div class="form-section"><div class="num">03</div><div><span class="eyebrow">TRAINING STYLE</span><h2>Choose what you enjoy</h2></div></div>
           <div class="preference-row"><label><input type="checkbox" value="Strength training" checked><span>Strength training</span></label><label><input type="checkbox" value="Running"><span>Running</span></label><label><input type="checkbox" value="Yoga"><span>Yoga</span></label><label><input type="checkbox" value="Bodyweight" checked><span>Bodyweight</span></label></div>
+          <div class="form-section coach-details"><div class="num">04</div><div><span class="eyebrow">COACH SETTINGS</span><h2>Set the right challenge</h2></div></div>
+          <div class="field-grid"><label>Fitness level<select id="fitnessLevel"><option>Beginner</option><option selected>Intermediate</option><option>Advanced</option></select></label><label>Intensity tolerance<select id="intensity"><option>Gentle</option><option selected>Moderate</option><option>Challenging</option></select></label><label>Session length<select id="sessionLength"><option value="20">20 minutes</option><option value="35" selected>35 minutes</option><option value="50">50 minutes</option><option value="60">60 minutes</option></select></label><label>Equipment<select id="equipment"><option>No equipment</option><option selected>Basic gym</option><option>Full gym</option></select></label></div>
+          <label class="coach-note-label">Limitations or movements to avoid<textarea id="fitnessLimitations" placeholder="e.g. sensitive knees, no jumping, none"></textarea></label>
           <button class="primary plan-button" type="submit">✦ Build my AI plan</button>
         </form>
         <div class="plan-result hidden" id="planResult"><div class="result-head"><div><span class="eyebrow">YOUR WEEKLY PLAN</span><h2><span id="planGoal">Fat loss</span> · 3-day training plan</h2><p id="planSummary"></p></div><div class="calorie-target"><small>Suggested daily intake</small><b id="calorieTarget">1,850</b><span>kcal</span></div></div><div class="week-grid" id="weekGrid"></div><div class="result-tip"><span>✦</span><div><b>AI coach note</b><p>Stay consistent for two weeks, then adjust volume based on completion and fatigue. Aim for 7–8 hours of sleep.</p></div><button data-go="food">Match high-protein meals →</button></div></div>
@@ -129,12 +176,27 @@
         <div class="progress-grid"><article><span>🔥</span><small>Workouts this week</small><b>3 / 4 sessions</b><i><u style="width:75%"></u></i></article><article><span>🥗</span><small>Days on target</small><b>5 / 7 days</b><i><u style="width:71%"></u></i></article><article><span>⚖️</span><small>Weight change</small><b>− 0.6 kg</b><i><u style="width:60%"></u></i></article></div>
         <div class="chart-card"><div><span class="eyebrow">PAST 7 DAYS</span><h2>Daily calorie balance</h2></div><div class="chart" aria-label="Seven-day calorie chart"><span style="height:58%"><i>Mon</i></span><span style="height:72%"><i>Tue</i></span><span style="height:65%"><i>Wed</i></span><span class="accent" style="height:88%"><i>Thu</i></span><span style="height:76%"><i>Fri</i></span><span style="height:52%"><i>Sat</i></span><span style="height:42%"><i>Sun</i></span></div></div>
       </section>
+
+      <section class="view" id="profileView">
+        <div class="page-title"><div><button class="back" data-go="home">← Back home</button><span class="eyebrow">YOUR WELLNESS PROFILE</span><h1>Designed around you</h1><p>Review the information used by your AI coach. Update it whenever your routine or goals change.</p></div><button class="secondary" id="restartTour">Replay beginner tour</button></div>
+        <div class="profile-dashboard">
+          <aside class="profile-summary-card"><div class="profile-large" id="profilePageInitial">T</div><h2 id="profilePageName">TaylorFit</h2><p>Taylor’s Lakeside member</p><div class="profile-goal"><small>PRIMARY GOAL</small><b id="profileGoal">Fat loss</b><span id="profileTarget">Target 60 kg</span></div><button class="primary wide" id="editProfileButton">Edit profile</button><button class="signout-btn" id="signOutButton">Log out</button></aside>
+          <div class="profile-info-grid">
+            <article><span>📏</span><small>CURRENT STATUS</small><h3 id="profileBody">21 years · 168 cm · 64 kg</h3><p id="profileActivity">Lightly active</p></article>
+            <article><span>🏋️</span><small>TRAINING SETUP</small><h3 id="profileTraining">3 days · 35 minutes</h3><p id="profileLevel">Intermediate · Moderate intensity</p></article>
+            <article><span>🥗</span><small>FOOD PREFERENCES</small><h3 id="profileDiet">No preference</h3><p id="profileAvoid">No foods excluded</p></article>
+            <article><span>🛡️</span><small>COMFORT & SAFETY</small><h3>Movement notes</h3><p id="profileLimitations">No limitations provided</p></article>
+            <article class="profile-ai-card"><span>✦</span><small>AI COACH SUMMARY</small><h3 id="profileCoachSummary">A balanced three-day plan with progressive strength and sustainable nutrition.</h3><button data-go="fitness">Refresh my plan →</button></article>
+            <article class="profile-trial-card"><small>AI REPORT PRO</small><h3>7-day free access</h3><p>Weekly insights, plan adjustments and unlimited coaching.</p><button id="profileSubscribe">Manage subscription →</button></article>
+          </div>
+        </div>
+      </section>
     </main>
 
     <button class="chat-fab" id="chatFab" aria-label="Open AI assistant"><span>✦</span><b>Ask Healthfit AI</b></button>
     <aside class="chat-panel" id="chatPanel" aria-label="AI chat">
       <div class="chat-head"><div><span class="spark">✦</span><div><b>Healthfit AI</b><small><i></i> Online · Demo mode</small></div></div><button id="closeChat">×</button></div>
-      <div class="chat-body" id="chatBody"><div class="message ai">Hi! I can compare menu calories, explain your workout plan or offer general wellness guidance. Where would you like to start?</div><div class="quick-prompts"><button>Recommend lunch under 500 kcal</button><button>How should I train today?</button><button>How can I get more protein?</button></div></div>
+      <div class="chat-body" id="chatBody"><div class="message ai">Hi! I can estimate calories for common foods, compare meals and adapt workouts to your profile. What would you like to know?</div><div class="quick-prompts"><button>How many calories are in a banana?</button><button>Compare an apple and a banana</button><button>How should I train today?</button><button>Recommend lunch under 500 kcal</button></div></div>
       <form class="chat-input" id="chatForm"><input id="chatInput" placeholder="Ask a question…" autocomplete="off"><button type="submit">↑</button></form>
     </aside>
 
@@ -142,8 +204,12 @@
     <section class="modal" id="paymentModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="paymentModal">×</button><span class="modal-icon">✓</span><span class="eyebrow">SECURE DEMO CHECKOUT</span><h2>Review and pay</h2><div class="pay-summary"><p><span>Order</span><b id="payItems">0 items</b></p><p><span>Dining option</span><b id="payMode">Delivery</b></p><p><span>Amount due</span><b id="payTotal">RM 0.00</b></p></div><label>Card number<input value="4242 4242 4242 4242" aria-label="Demo card number"></label><div class="pay-fields"><label>Expiry<input value="12/30"></label><label>CVV<input value="123"></label></div><button class="primary wide" id="payButton">Simulate payment <span>→</span></button><small class="modal-note">Interactive demo only. No real charge is made and no payment details are stored.</small></section>
     <section class="modal success-modal" id="successModal" aria-modal="true" role="dialog"><span class="success-check">✓</span><h2>Order confirmed</h2><p>Subway is preparing your meal. Estimated arrival at Taylor’s Lakeside Campus: <b>18 minutes</b>.</p><div class="order-no">Order <b>HF-2026-1024</b></div><button class="primary wide" data-close="successModal">Done</button></section>
     <section class="modal subscription-modal" id="subscriptionModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="subscriptionModal">×</button><span class="eyebrow">AI REPORT PRO</span><h2>Keep learning about your body after day seven</h2><p>Unlock weekly AI reports, automatic plan adjustments and personalised meal matching.</p><ul><li>✓ Weekly training and nutrition trends</li><li>✓ Goals that adapt to your progress</li><li>✓ Unlimited AI wellness chat</li></ul><div class="price"><b>RM 14.90</b><span>/ month</span></div><button class="primary wide" id="subscribeButton">Start 7-day free trial</button><small class="modal-note">Demo subscription only. No charge will be made.</small></section>
-    <section class="modal profile-modal" id="profileModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="profileModal">×</button><div class="profile-large" id="profileInitial">T</div><h2 id="profileName">TaylorFit</h2><p>Student account · Taylor’s Lakeside</p><div class="profile-links"><button id="openSubscription">✦ AI report subscription <span>7-day trial →</span></button><button>⚙ Personal profile <span>›</span></button><button>⌁ Privacy and data <span>›</span></button></div></section>
+    <section class="modal profile-modal" id="profileModal" aria-modal="true" role="dialog"><button class="modal-close" data-close="profileModal">×</button><div class="profile-large" id="profileInitial">T</div><h2 id="profileName">TaylorFit</h2><p>Student account · Taylor’s Lakeside</p><div class="profile-links"><button id="openSubscription">✦ AI report subscription <span>7-day trial →</span></button><button id="openFullProfile">⚙ Personal profile <span>View →</span></button><button id="modalLogout">↪ Log out <span>›</span></button></div></section>
+
+    <section class="tour-overlay hidden" id="tourOverlay" aria-live="polite">
+      <div class="tour-card"><div class="tour-progress" id="tourProgress">1 / 5</div><div class="tour-icon" id="tourIcon">👋</div><span class="eyebrow">QUICK START</span><h2 id="tourTitle">Welcome to HealthfitAI</h2><p id="tourText">Your meals, workouts and progress now work together around one personal goal.</p><div class="tour-actions"><button class="text-btn" id="skipTour">Skip tour</button><button class="primary" id="nextTour">Next <span>→</span></button></div></div>
+    </section>
   </div>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261105"></script>
 </body>
 </html>
