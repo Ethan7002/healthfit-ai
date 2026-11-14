@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="title">
+  <title id="title">Maintain health goal illustration</title>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e9f5e3"/><stop offset="1" stop-color="#b9dfb8"/></linearGradient></defs>
+  <rect width="320" height="180" rx="26" fill="url(#bg)"/>
+  <circle cx="160" cy="90" r="62" fill="#fff" opacity=".78"/>
+  <path d="M160 131c-9-11-43-35-43-61 0-17 13-29 29-29 9 0 17 4 22 12 5-8 13-12 22-12 16 0 29 12 29 29 0 26-34 50-59 61Z" fill="#1a8055"/>
+  <path d="M89 91h44l10-19 19 39 15-29 10 9h44" fill="none" stroke="#d8f55b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
