@@ -181,7 +181,7 @@ function trialDaysLeft(){ if(!activeUser) return 7; const start=new Date(account
 function applyPlanMode(){
   if(!activeUser) return;
   const vip=isVip(); document.body.classList.toggle('vip-mode',vip); document.body.classList.toggle('free-mode',!vip);
-  $('#planBadge').textContent=vip?'VIP TRIAL':'FREE'; $('#planDays').textContent=vip?t(`${trialDaysLeft()} days left`,`${trialDaysLeft()}天剩余`):t('Essentials only','基础功能');
+  $('#trialButton > span').textContent=vip?'♛':'◆'; $('#planBadge').textContent=vip?t('VIP SYSTEM','VIP系统'):t('BASIC SYSTEM','基础系统'); $('#planDays').textContent=vip?t(`${trialDaysLeft()} days left`,`${trialDaysLeft()}天剩余`):t('Core tools','核心工具');
   $('#profilePlanLabel').textContent=vip?'VIP TRIAL':'FREE'; $('#profilePlanTitle').textContent=vip?t(`${trialDaysLeft()} days free`,`${trialDaysLeft()}天免费`):t('Everyday essentials','日常基础功能');
   $('#profilePlanText').textContent=vip?t('AI guidance, progress reports and unlimited chat.','AI建议、进度报告和无限聊天。'):t('BMR, meal calories and campus ordering.','BMR、餐点热量和校园点餐。');
   $('#profileModalPlan').textContent=vip?t('VIP trial →','VIP试用 →'):t('Free →','普通版 →');
@@ -216,11 +216,43 @@ function showView(name){ $$('.view').forEach(view=>view.classList.remove('active
 $$('[data-go]').forEach(el=>el.addEventListener('click',()=>showView(el.dataset.go)));
 $$('.feature-card').forEach(el=>el.addEventListener('keydown',event=>{if(event.key==='Enter')showView(el.dataset.go);}));
 
-const tours={en:[['👋','Welcome to HealthfitAI','Free essentials and VIP intelligence now have clearly different experiences.','home'],['⚡','Know your BMR','Your formula and resting-energy estimate stay visible in your profile.','profile'],['✦','Use VIP AI guidance','VIP compares your target and timeline, then explains an appropriate starting intensity.','fitness'],['🥪','Order with calories upfront','Browse Subway calories, choose delivery, takeaway or dine-in, then use demo checkout.','food']],zh:[['👋','欢迎使用 HealthfitAI','普通版和VIP版现在拥有明显不同的界面和功能。','home'],['⚡','了解你的BMR','公式和静息能量估算会保存在个人资料中。','profile'],['✦','使用VIP AI建议','VIP会比较目标与期限，并说明合适的起始强度。','fitness'],['🥪','看清热量再点餐','浏览Subway热量，选择外送、外带或堂食，再使用模拟结账。','food']]};
-function renderTour(){ const items=tours[locale], item=items[tourStep]; $('#tourProgress').textContent=`${tourStep+1} / ${items.length}`; $('#tourIcon').textContent=item[0]; $('#tourTitle').textContent=item[1]; $('#tourText').textContent=item[2]; $('#nextTour').innerHTML=tourStep===items.length-1?t('Start exploring <span>→</span>','开始体验 <span>→</span>'):t('Next <span>→</span>','下一步 <span>→</span>'); showView(item[3]); }
+const tours={
+  en:[
+    {icon:'◆',label:'Platform system',title:'Switch or manage your system',text:'This badge shows whether you are using the Basic System or VIP System. Select it to compare both systems.',target:'#trialButton'},
+    {icon:'🥪',label:'Campus ordering',title:'Order food with calories upfront',text:'Open the campus menu, compare calories and nutrition, then choose delivery, takeaway or dine-in.',target:'#tourOrderButton'},
+    {icon:'✦',label:'VIP goal guidance',title:'Open your AI goal analysis',text:'VIP compares your current weight, target and requested timeline, then explains a reasonable starting pace.',target:'#tourAiButton'},
+    {icon:'⚡',label:'BMR and profile',title:'See your formula and personal data',text:'Open your profile to review the BMR formula, current status, timeline and selected intensity.',target:'#tourProfileButton'},
+    {icon:'👤',label:'Personal account',title:'Open your personal information',text:'Use this button for membership status, your full profile and account controls.',target:'#profileButton'},
+    {icon:'💬',label:'VIP AI coach',title:'Ask about food or your goal',text:'Open the AI coach to ask about banana or apple calories, your BMR, or whether your timeline is realistic.',target:'#chatFab'}
+  ],
+  zh:[
+    {icon:'◆',label:'平台系统',title:'切换或管理你的系统',text:'这里会显示你正在使用基础系统还是VIP系统。点击可比较两套系统并进行切换。',target:'#trialButton'},
+    {icon:'🥪',label:'校园点餐',title:'查看热量后再点餐',text:'进入校园菜单，比较热量和营养，然后选择外送、外带或堂食。',target:'#tourOrderButton'},
+    {icon:'✦',label:'VIP目标建议',title:'打开AI目标分析',text:'VIP会比较当前体重、目标体重和期望期限，并解释合理的起始节奏。',target:'#tourAiButton'},
+    {icon:'⚡',label:'BMR与个人资料',title:'查看公式和个人数据',text:'进入个人资料，查看BMR公式、当前状态、目标期限和已选强度。',target:'#tourProfileButton'},
+    {icon:'👤',label:'个人账户',title:'打开个人信息',text:'这里可以查看会员状态、完整个人资料以及账户功能。',target:'#profileButton'},
+    {icon:'💬',label:'VIP AI教练',title:'询问食物或目标问题',text:'打开AI教练，可以询问香蕉或苹果热量、BMR，或者目标期限是否合理。',target:'#chatFab'}
+  ]
+};
+function positionTour(){
+  const item=tours[locale][tourStep], target=$(item.target), card=$('#tourCard'); if(!target||!card) return;
+  const rect=target.getBoundingClientRect(), gap=18, margin=12, width=Math.min(390,window.innerWidth-margin*2);
+  card.style.width=`${width}px`; card.style.left=`${margin}px`; card.style.top=`${margin}px`;
+  const height=card.offsetHeight; let left,top,placement;
+  if(rect.right+gap+width<=window.innerWidth-margin){left=rect.right+gap;top=rect.top+rect.height/2-height/2;placement='right';}
+  else if(rect.left-gap-width>=margin){left=rect.left-gap-width;top=rect.top+rect.height/2-height/2;placement='left';}
+  else if(rect.bottom+gap+height<=window.innerHeight-margin){left=rect.left+rect.width/2-width/2;top=rect.bottom+gap;placement='bottom';}
+  else{left=rect.left+rect.width/2-width/2;top=rect.top-gap-height;placement='top';}
+  card.style.left=`${Math.max(margin,Math.min(left,window.innerWidth-width-margin))}px`; card.style.top=`${Math.max(margin,Math.min(top,window.innerHeight-height-margin))}px`; card.dataset.placement=placement;
+}
+function renderTour(){
+  const items=tours[locale], item=items[tourStep]; $$('.tour-target').forEach(el=>el.classList.remove('tour-target')); showView('home');
+  $('#tourProgress').textContent=`${tourStep+1} / ${items.length}`; $('#tourIcon').textContent=item.icon; $('#tourFeatureLabel').textContent=item.label; $('#tourTitle').textContent=item.title; $('#tourText').textContent=item.text; $('#nextTour').textContent=tourStep===items.length-1?t('Start exploring','开始体验'):t('Next feature','下一个功能');
+  const target=$(item.target); if(!target) return; target.classList.add('tour-target'); target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}); window.setTimeout(positionTour,260);
+}
 function openTour(){tourStep=0;$('#tourOverlay').classList.remove('hidden');renderTour();}
-function closeTour(){ $('#tourOverlay').classList.add('hidden'); if(activeUser&&accounts[activeUser]){accounts[activeUser].tourSeen=true;saveAccounts();} }
-$('#nextTour').addEventListener('click',()=>{ const items=tours[locale]; if(tourStep>=items.length-1){closeTour();showView('home');}else{tourStep++;renderTour();} }); $('#skipTour').addEventListener('click',()=>{closeTour();showView('home');}); $('#restartTour').addEventListener('click',openTour);
+function closeTour(){ $$('.tour-target').forEach(el=>el.classList.remove('tour-target')); $('#tourOverlay').classList.add('hidden'); if(activeUser&&accounts[activeUser]){accounts[activeUser].tourSeen=true;saveAccounts();} }
+$('#nextTour').addEventListener('click',()=>{ const items=tours[locale]; if(tourStep>=items.length-1){closeTour();showView('home');}else{tourStep++;renderTour();} }); $('#skipTour').addEventListener('click',()=>{closeTour();showView('home');}); $('#restartTour').addEventListener('click',openTour); window.addEventListener('resize',()=>{if(!$('#tourOverlay').classList.contains('hidden'))positionTour();});
 
 function logOut(){activeUser=null;profile=null;closeModals();$('#chatPanel').classList.remove('open');showAuth('login');}
 $('#signOutButton').addEventListener('click',logOut); $('#modalLogout').addEventListener('click',logOut); $('#editProfileButton').addEventListener('click',()=>openOnboarding(true));
